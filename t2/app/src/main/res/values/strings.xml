@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Android TicTacToe</string>
+    <string name="human_first">You go first.</string>
+    <string name="human_turn">Your turn.</string>
+    <string name="android_turn">Android\'s turn.</string>
+    <string name="result_tie">It\'s a tie.</string>
+    <string name="result_human_wins">You won!</string>
+    <string name="result_android_wins">Android won!</string>
+    <string name="human">Human: %1$d</string>
+    <string name="tie">Tie: %1$d</string>
+    <string name="android">Android: %1$d</string>
+</resources>
