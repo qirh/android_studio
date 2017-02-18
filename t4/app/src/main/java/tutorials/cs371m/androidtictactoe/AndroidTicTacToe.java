@@ -29,6 +29,9 @@ public class AndroidTicTacToe extends AppCompatActivity {
 
     private boolean mHumanGoesFirst;
 
+    //for thread safety
+    private boolean allow_move = true;
+
     // is the game over or not?
     private boolean mGameOver;
 
@@ -83,6 +86,8 @@ public class AndroidTicTacToe extends AppCompatActivity {
     }
 
     private void setMove(char player, int location, int soundID) {
+
+        Log.d("MOVE", "inside move\n\n");
         mGame.setMove(player, location);
         mBoardView.invalidate();
         mSounds.play(soundID, 1, 1, 1, 0, 1);
@@ -92,18 +97,22 @@ public class AndroidTicTacToe extends AppCompatActivity {
 
 
         mInfoTextView.setText(R.string.computer_turn);
-
+        allow_move = false;
+        Log.d("DELAY", "no moves allowed");
         Handler handler = new Handler(); handler.postDelayed(new Runnable() {
             public void run() {
-                Log.d("DELAY", "Hello");
+               // Log.d("DELAY", "Hello");
                 int move = mGame.getComputerMove();
                 setMove(TicTacToeGame.COMPUTER_PLAYER, move, mComputerMoveSoundID);
                 int winner = mGame.checkForWinner();
                 if (winner == 0) {
                     mInfoTextView.setText(R.string.human_turn);
-                } else {
+                }
+                else {
                     handleEndGame(winner);
                 }
+                allow_move = true;
+              //  Log.d("DELAY", "allow_move = true");
             }
         }, new Random().nextInt(500) + 500);
         /*
@@ -116,6 +125,7 @@ public class AndroidTicTacToe extends AppCompatActivity {
             handleEndGame(winner);
         }
         */
+        Log.d("\nDELAY", "moves allowed");
     }
 
     private void handleEndGame(int winner) {
@@ -139,29 +149,29 @@ public class AndroidTicTacToe extends AppCompatActivity {
         mGameOver = true;
         mHumanGoesFirst = !mHumanGoesFirst;
     }
-
+    /*
     // Handles clicks on the game board buttons
     private class ButtonClickListener implements View.OnClickListener {
         int location;
 
         public ButtonClickListener(int location) {
+
             this.location = location;
         }
 
         public void onClick(View view) {
-            if (mBoardButtons[location].isEnabled() && !mGameOver) {
+            if (mBoardButtons[location].isEnabled() && !mGameOver && allow_move) {
+                Log.d("onClick", "CLICK REGISTERED");
                 setMove(TicTacToeGame.HUMAN_PLAYER, location, mComputerMoveSoundID);
                 int winner = mGame.checkForWinner();
-                if (winner == 0) {
+                if (winner == 0)
                     computerMove();
-                }
-                else {
+                else
                     handleEndGame(winner);
-                }
             }
         }
     }
-
+    */
     // Code below this point was added in tutorial 3.
 
     @Override
@@ -223,7 +233,9 @@ public class AndroidTicTacToe extends AppCompatActivity {
     // Listen for touches on the board. Only apply move if game not over.
     private View.OnTouchListener mTouchListener = new View.OnTouchListener() {
         public boolean onTouch(View v, MotionEvent event) {
-            if (!mGameOver) {
+            Log.d("OnTouchListener", "1");
+            if (!mGameOver && allow_move) {
+                Log.d("OnTouchListener", "2");
                 // Determine which cell was touched
                 int col = (int) event.getX() / mBoardView.getBoardCellWidth();
                 int row = (int) event.getY() / mBoardView.getBoardCellHeight();

@@ -41,6 +41,7 @@ public class BoardView extends View {
     }
 
     public void setGame(TicTacToeGame game) {
+
         mGame = game;
     }
 
@@ -56,6 +57,7 @@ public class BoardView extends View {
 
     @Override
     public void onDraw(Canvas canvas) {
+        Log.d("onDraw", "1");
         super.onDraw(canvas);
         int boardWidth = getWidth();
         int boardHeight = getHeight();
@@ -73,7 +75,7 @@ public class BoardView extends View {
             int col = i % 3;
             int row = i / 3;
 
-            Log.d("ONDRAW!!!!!", "col = " + col + " ,row = " + row);
+
             // Define the boundaries of a destination rectangle for the image
             drawingRect.left = col*(boardWidth/3) + (boardWidth/30);
             drawingRect.top = row*(boardHeight/3) + (boardHeight/30);
@@ -81,11 +83,11 @@ public class BoardView extends View {
             drawingRect.bottom = (row)*(boardHeight/3) + boardHeight/4;
 
             if (mGame != null && mGame.getBoardOccupant(i) == TicTacToeGame.HUMAN_PLAYER) {
-                Log.d("mHumanBitmap", "col = " + col + " ,row = " + row);
+                //Log.d("mHumanBitmap", "col = " + col + " ,row = " + row);
                 canvas.drawBitmap(mHumanBitmap, null, drawingRect, null);
             }
             else if (mGame != null && mGame.getBoardOccupant(i) == TicTacToeGame.COMPUTER_PLAYER) {
-                Log.d("mComputerBitmap", "col = " + col + " ,row = " + row);
+                //Log.d("mComputerBitmap", "col = " + col + " ,row = " + row);
                 canvas.drawBitmap(mComputerBitmap, null, drawingRect, null);
             }
         }
