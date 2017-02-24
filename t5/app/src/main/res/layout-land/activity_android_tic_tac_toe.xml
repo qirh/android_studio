@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="horizontal"
+    tools:context="tutorials.cs371m.androidtictactoe.AndroidTicTacToe">
+
+    <tutorials.cs371m.androidtictactoe.BoardView
+        android:id="@+id/boardView"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:layout_margin="25dp"/>
+
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/information"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:gravity="center_horizontal"
+            android:text="@string/info"
+            android:textSize="30sp" />
+
+        <TextView
+            android:id="@+id/human_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/information"
+            android:layout_margin="10dp"
+            android:text="@string/human"
+            android:textSize="30sp" />
+
+        <TextView
+            android:id="@+id/human_wins_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/information"
+            android:layout_toRightOf="@+id/human_label"
+            android:layout_margin="10dp"
+            android:textStyle="bold"
+            android:textSize="30sp"
+            android:text="@string/zero"/>
+
+        <TextView
+            android:id="@+id/ties_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/human_label"
+            android:layout_margin="10dp"
+            android:textSize="30sp"
+            android:text="@string/ties"/>
+
+        <TextView
+            android:id="@+id/android_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ties_label"
+            android:layout_margin="10dp"
+            android:textSize="30sp"
+            android:text="@string/android"/>
+
+        <TextView
+            android:id="@+id/android_wins_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ties_label"
+            android:layout_toRightOf="@+id/android_label"
+            android:layout_margin="10dp"
+            android:textStyle="bold"
+            android:textSize="30sp"
+            android:text="@string/zero"/>
+
+        <TextView
+            android:id="@+id/ties_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textSize="30sp"
+            android:text="@string/zero"
+            android:layout_alignBaseline="@+id/ties_label"
+            android:layout_alignBottom="@+id/ties_label"
+            android:layout_alignRight="@+id/human_label"
+            android:layout_alignEnd="@+id/human_label" />
+
+    </RelativeLayout>
+
+</LinearLayout>
